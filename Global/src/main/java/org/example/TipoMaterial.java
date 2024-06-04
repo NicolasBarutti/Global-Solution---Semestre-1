@@ -5,5 +5,6 @@ public enum TipoMaterial {
     plastico,
     vidro,
     metal,
+    oleo,
 
 }

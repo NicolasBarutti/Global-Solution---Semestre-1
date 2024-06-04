@@ -1,6 +1,9 @@
 package org.example;
 
 public enum NaoColetaveis {
-    embarcacoes,
-    animais,
+    embarcao,
+    animal,
+    ilha,
+    rocha,
+    coral,
 }
