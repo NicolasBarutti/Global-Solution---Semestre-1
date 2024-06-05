@@ -1,0 +1,225 @@
+{
+  "intents": [
+    {
+      "intent": "Doação",
+      "examples": [
+        {
+          "text": "Como faço doação ?"
+        },
+        {
+          "text": "Como faço para doar?"
+        },
+        {
+          "text": "onde fica o link para doar ?"
+        },
+        {
+          "text": "Onde posso fazer uma doação ?"
+        },
+        {
+          "text": "Quero fazer uma doação"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Eventos",
+      "examples": [
+        {
+          "text": "Em qual dia ocorrerá o evento?"
+        },
+        {
+          "text": "Em que data será realizado o evento?"
+        },
+        {
+          "text": "Em que dia está agendado o evento?"
+        },
+        {
+          "text": "Em que dia está marcado o próximo compromisso?"
+        },
+        {
+          "text": "Em que momento está agendado o próximo evento?"
+        },
+        {
+          "text": "Qual é a data do próximo encontro?"
+        },
+        {
+          "text": "Qual será o dia do evento?"
+        },
+        {
+          "text": "Quando está prevista a realização do evento?"
+        },
+        {
+          "text": "Quando está programada a próxima reunião?"
+        },
+        {
+          "text": "Quando ocorrerá a próxima atividade?"
+        },
+        {
+          "text": "Quando será o proximo evento?"
+        },
+        {
+          "text": "Que dia vai ser o evento?"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "sim_nao",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "nao",
+          "synonyms": [
+            "n",
+            "não",
+            "nem"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "sim",
+          "synonyms": [
+            "claro",
+            "ok",
+            "s",
+            "ta bom"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Bem-vindo",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Olá como posso te ajudar ?                                                                                                         "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "multiline"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Bem-vindo"
+    },
+    {
+      "type": "standard",
+      "title": "Em outros casos",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Eu não entendi. Você pode tentar reformular a frase."
+              },
+              {
+                "text": "Você pode reformular sua afirmação? Eu não estou entendendo."
+              },
+              {
+                "text": "Eu não entendi o sentido."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Em outros casos",
+      "previous_sibling": "node_3_1716993064466",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "Eventos ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Próximo evento será no dia 29/06 em um sábado, os eventos seguintes serão em todos os sabádos."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#Eventos",
+      "dialog_node": "node_3_1716993064466",
+      "previous_sibling": "node_5_1717436203861"
+    },
+    {
+      "type": "standard",
+      "title": "Doação",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Acesse esse link e faça a doação"
+              },
+              {
+                "text": "https://doeagora.netlify.app"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "multiline"
+          }
+        ]
+      },
+      "conditions": "#Doação",
+      "dialog_node": "node_5_1717436203861",
+      "previous_sibling": "node_5_1717437265365"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "dialog_node": "node_5_1717437265365",
+      "previous_sibling": "Bem-vindo"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "disambiguation": {
+      "prompt": "Você quis dizer:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "Nenhuma das anteriores",
+      "use_connect_to_support_prompt": "Connect to support",
+      "single_answer_clarification_prompt": "Something else"
+    },
+    "human_agent_assist": {
+      "prompt": "Você quis dizer:"
+    }
+  },
+  "learning_opt_out": false,
+  "language": "pt-br",
+  "description": "",
+  "name": "Global Solution-dialog"
+}
