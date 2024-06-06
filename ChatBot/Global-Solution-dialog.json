@@ -1,6 +1,90 @@
 {
   "intents": [
     {
+      "intent": "Agradecimento",
+      "examples": [
+        {
+          "text": "Agradeço de coração pela sua ajuda."
+        },
+        {
+          "text": "Agradeço imensamente pelo seu tempo e esforço."
+        },
+        {
+          "text": "Agradeço profundamente pela sua assistência."
+        },
+        {
+          "text": "Fico muito agradecido pela sua consideração."
+        },
+        {
+          "text": "Muito obrigado por estar sempre presente."
+        },
+        {
+          "text": "Muito obrigado por tudo."
+        },
+        {
+          "text": "nois"
+        },
+        {
+          "text": "obrigado bot!"
+        },
+        {
+          "text": "Obrigado por fazer a diferença"
+        },
+        {
+          "text": "Sou eternamente grato pelo que fez por mim."
+        },
+        {
+          "text": "Sua gentileza significa muito para mim"
+        },
+        {
+          "text": "tmj"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "Cadastrar",
+      "examples": [
+        {
+          "text": "Abrir conta"
+        },
+        {
+          "text": "Cadastrar usuário"
+        },
+        {
+          "text": "Criar perfil"
+        },
+        {
+          "text": "Criar uma conta"
+        },
+        {
+          "text": "Efetuar registro"
+        },
+        {
+          "text": "Estabelecer perfil"
+        },
+        {
+          "text": "Fazer cadastro"
+        },
+        {
+          "text": "Inscrever-se"
+        },
+        {
+          "text": "Montar cadastro"
+        },
+        {
+          "text": "Realizar registro"
+        },
+        {
+          "text": "Registrar conta"
+        },
+        {
+          "text": "Registrar-se"
+        }
+      ],
+      "description": ""
+    },
+    {
       "intent": "Doação",
       "examples": [
         {
@@ -65,6 +149,45 @@
     }
   ],
   "entities": [
+    {
+      "entity": "celular",
+      "values": [
+        {
+          "type": "patterns",
+          "value": "celular",
+          "patterns": [
+            "\\d{5]-\\d{4}"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "cep",
+      "values": [
+        {
+          "type": "patterns",
+          "value": "cep",
+          "patterns": [
+            "\\d{5}-\\d{3}"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "email",
+      "values": [
+        {
+          "type": "patterns",
+          "value": "email",
+          "patterns": [
+            "^\\S+@\\S+\\.\\S+$"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
     {
       "entity": "sim_nao",
       "values": [
@@ -141,12 +264,114 @@
       },
       "conditions": "anything_else",
       "dialog_node": "Em outros casos",
-      "previous_sibling": "node_3_1716993064466",
+      "previous_sibling": "node_7_1717715734165",
       "disambiguation_opt_out": true
     },
     {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Digite seu email:"
+              }
+            ],
+            "response_type": "text"
+          }
+        ]
+      },
+      "parent": "slot_8_1717714966118",
+      "event_name": "focus",
+      "dialog_node": "handler_10_1717714966119",
+      "previous_sibling": "handler_5_1717714966119"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_1_1717714919736",
+      "context": {
+        "celular": "@celular"
+      },
+      "conditions": "@celular",
+      "event_name": "input",
+      "dialog_node": "handler_1_1717714919741"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_10_1717714868520",
+      "context": {
+        "cep": "@cep"
+      },
+      "conditions": "@cep",
+      "event_name": "input",
+      "dialog_node": "handler_2_1717714868560"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Digite seu celular: (com esse formato 11111-1111)"
+              }
+            ],
+            "response_type": "text"
+          }
+        ]
+      },
+      "parent": "slot_1_1717714919736",
+      "event_name": "focus",
+      "dialog_node": "handler_3_1717714919741",
+      "previous_sibling": "handler_1_1717714919741"
+    },
+    {
+      "type": "event_handler",
+      "output": {},
+      "parent": "slot_8_1717714966118",
+      "context": {
+        "email": "@email"
+      },
+      "conditions": "@email",
+      "event_name": "input",
+      "dialog_node": "handler_5_1717714966119"
+    },
+    {
+      "type": "event_handler",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Digite seu cep:"
+              }
+            ],
+            "response_type": "text"
+          }
+        ]
+      },
+      "parent": "slot_10_1717714868520",
+      "event_name": "focus",
+      "dialog_node": "handler_6_1717714868560",
+      "previous_sibling": "handler_2_1717714868560"
+    },
+    {
       "type": "standard",
-      "title": "Eventos ",
+      "title": "Sim para doação",
+      "parent": "node_5_1717437265365",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_5_1717436203861"
+      },
+      "conditions": "@sim_nao:sim",
+      "dialog_node": "node_1_1717715100512"
+    },
+    {
+      "type": "standard",
+      "title": "sim para seguir com eventos ",
       "output": {
         "generic": [
           {
@@ -160,9 +385,91 @@
           }
         ]
       },
+      "parent": "node_3_1716993064466",
+      "conditions": "@sim_nao:sim",
+      "dialog_node": "node_1_1717716339780"
+    },
+    {
+      "type": "standard",
+      "title": "sim para a causa",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Acesse esse link e faça a doação:"
+              },
+              {
+                "text": "https://doeagora.netlify.app"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1717436203861",
+      "conditions": "@sim_nao:sim",
+      "dialog_node": "node_2_1717715489868"
+    },
+    {
+      "type": "standard",
+      "title": "sim para saber sobre eventos ",
+      "parent": "node_3_1717715155271",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_3_1716993064466"
+      },
+      "conditions": "@sim_nao:sim",
+      "dialog_node": "node_2_1717715815828"
+    },
+    {
+      "type": "standard",
+      "title": "Eventos ",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Olá!\n\nObrigado por considerar uma doação para o nosso projeto. Com a sua contribuição, iremos apoiar eventos organizados por ONGs e voluntários dedicados à limpeza de praias e oceanos. Seu apoio é essencial para financiar essas ações que ajudam a remover o lixo das nossas costas e preservar a vida marinha.\n\nAgradecemos seu apoio!"
+              },
+              {
+                "text": "Digite sim caso queira saber as proximas datas:"
+              },
+              {
+                "text": "Caso não queira saber sobre os eventos digiet não:"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "multiline"
+          }
+        ]
+      },
       "conditions": "#Eventos",
       "dialog_node": "node_3_1716993064466",
       "previous_sibling": "node_5_1717436203861"
+    },
+    {
+      "type": "standard",
+      "title": "não para doar",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Você deseja saber sobre os eventos ?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1717437265365",
+      "conditions": "@sim_nao:nao",
+      "dialog_node": "node_3_1717715155271",
+      "previous_sibling": "node_1_1717715100512"
     },
     {
       "type": "standard",
@@ -172,10 +479,13 @@
           {
             "values": [
               {
-                "text": "Acesse esse link e faça a doação"
+                "text": "Olá!\n\nObrigado por considerar uma doação para o nosso projeto. Com a sua contribuição, iremos apoiar ONGs dedicadas a combater a poluição dos mares e oceanos. O dinheiro será direcionado para iniciativas que promovem a limpeza das águas, a conservação da vida marinha e a educação ambiental. Juntos, podemos fazer a diferença e proteger nosso planeta.\n\nAgradecemos seu apoio!"
               },
               {
-                "text": "https://doeagora.netlify.app"
+                "text": "Digite sim para ter acesso ao link para doar: "
+              },
+              {
+                "text": "Caso não queire doar digite não:"
               }
             ],
             "response_type": "text",
@@ -188,18 +498,114 @@
       "previous_sibling": "node_5_1717437265365"
     },
     {
-      "type": "standard",
+      "type": "frame",
+      "title": "Cadastrar",
       "output": {
         "generic": [
           {
-            "values": [],
+            "values": [
+              {
+                "text": "Cadastro realizado com sucesso! Você deseja participar do nosso projeto?"
+              },
+              {
+                "text": "Responda com sim se deseja fazer uma doação e não para outros assuntos "
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "multiline"
+          }
+        ]
+      },
+      "conditions": "#Cadastrar",
+      "dialog_node": "node_5_1717437265365",
+      "previous_sibling": "Bem-vindo"
+    },
+    {
+      "type": "standard",
+      "title": "não",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Espero que tenha tirado sua duvida, até mais!"
+              }
+            ],
             "response_type": "text",
             "selection_policy": "sequential"
           }
         ]
       },
-      "dialog_node": "node_5_1717437265365",
-      "previous_sibling": "Bem-vindo"
+      "parent": "node_3_1716993064466",
+      "conditions": "@sim_nao:nao",
+      "dialog_node": "node_6_1717716606333",
+      "previous_sibling": "node_1_1717716339780"
+    },
+    {
+      "type": "standard",
+      "title": "nao",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Espero que tenha tirado sua duvida, até mais!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1717436203861",
+      "conditions": "@sim_nao:nao",
+      "dialog_node": "node_6_1717716686846",
+      "previous_sibling": "node_2_1717715489868"
+    },
+    {
+      "type": "standard",
+      "title": "Agradecimento",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Obrigado você!!"
+              },
+              {
+                "text": "De nada !!"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#Agradecimento",
+      "digress_in": "does_not_return",
+      "dialog_node": "node_7_1717715734165",
+      "previous_sibling": "node_3_1716993064466"
+    },
+    {
+      "type": "slot",
+      "parent": "node_5_1717437265365",
+      "variable": "$cep",
+      "dialog_node": "slot_10_1717714868520",
+      "previous_sibling": "node_3_1717715155271"
+    },
+    {
+      "type": "slot",
+      "parent": "node_5_1717437265365",
+      "variable": "$celular",
+      "dialog_node": "slot_1_1717714919736",
+      "previous_sibling": "slot_10_1717714868520"
+    },
+    {
+      "type": "slot",
+      "parent": "node_5_1717437265365",
+      "variable": "$email",
+      "dialog_node": "slot_8_1717714966118",
+      "previous_sibling": "slot_1_1717714919736"
     }
   ],
   "counterexamples": [],
