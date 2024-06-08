@@ -1,19 +1,19 @@
 package org.example;
 
 public class Material {
-    private TipoMaterial tipoMaterial;
+    private TiposMaterial tipoMaterial;
     private AreaMaterial areaMaterial;
 
-    public Material(TipoMaterial tipoMaterial, AreaMaterial areaMaterial) {
+    public Material(TiposMaterial tipoMaterial, AreaMaterial areaMaterial) {
         this.tipoMaterial = tipoMaterial;
         this.areaMaterial = areaMaterial;
     }
 
-    public TipoMaterial getTipoMaterial() {
+    public TiposMaterial getTipoMaterial() {
         return tipoMaterial;
     }
 
-    public void setTipoMaterial(TipoMaterial tipoMaterial) {
+    public void setTipoMaterial(TiposMaterial tipoMaterial) {
         this.tipoMaterial = tipoMaterial;
     }
 
@@ -23,5 +23,9 @@ public class Material {
 
     public void setAreaMaterial(AreaMaterial areaMaterial) {
         this.areaMaterial = areaMaterial;
+    }
+
+    public boolean getColetavelOuNao(TiposMaterial tipoMaterial){
+        if()
     }
 }

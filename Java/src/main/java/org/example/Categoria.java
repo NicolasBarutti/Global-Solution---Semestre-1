@@ -2,11 +2,11 @@ package org.example;
 
 public class Categoria {
     private Material material;
-    private NaoColetaveis naoColetaveis;
 
-    public Categoria(Material material, NaoColetaveis naoColetaveis) {
+
+    public Categoria(Material material) {
         this.material = material;
-        this.naoColetaveis = naoColetaveis;
+
     }
 
     public Material getMaterial() {
@@ -17,15 +17,4 @@ public class Categoria {
         this.material = material;
     }
 
-    public NaoColetaveis getNaoColetaveis() {
-        return naoColetaveis;
-    }
-
-    public void setNaoColetaveis(NaoColetaveis naoColetaveis) {
-        this.naoColetaveis = naoColetaveis;
-    }
-
-    public void getPriovidadeColeta(){
-
-    }
 }

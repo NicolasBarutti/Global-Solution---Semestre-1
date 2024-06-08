@@ -24,6 +24,8 @@ public class AreaMaterial {
         this.largura = largura;
     }
 
+
+    //metodo para calcular a area do material escaniado (é clalculado o produto dos atributos da classe)
     public double getAreaMaterial(){
         return altura * largura;
     }
