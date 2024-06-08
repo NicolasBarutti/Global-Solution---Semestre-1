@@ -164,8 +164,6 @@ footer a{
 
 @media (min-width: 1201px) {
 
-    /* Desktop*/
-
     main{
         display: flex;
         justify-content: space-between;
